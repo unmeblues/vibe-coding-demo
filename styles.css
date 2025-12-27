@@ -1,0 +1,21 @@
+:root{--bg:#fbfbfd;--card:#fff;--primary:#6b46ff;--muted:#9aa4b2;--danger:#ff4b4b}
+*{box-sizing:border-box}
+body{font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#f7f8fb,#fbfdff);margin:0;color:#111;display:flex;align-items:center;justify-content:center;height:100vh}
+.todo-app{width:360px;background:var(--card);border-radius:12px;box-shadow:0 10px 30px rgba(16,24,40,0.08);padding:28px}
+.todo-header h1{margin:0;text-align:center;font-size:28px;letter-spacing:1px}
+.input-row{display:flex;gap:12px;margin-top:20px}
+.input-row input{flex:1;padding:14px 16px;border:1px solid #e6e9ee;border-radius:8px;font-size:14px;color:#333}
+.input-row input::placeholder{color:var(--muted)}
+.input-row button{width:44px;height:44px;border-radius:8px;border:0;background:var(--primary);color:#fff;font-size:22px;cursor:pointer}
+.todo-list{list-style:none;padding:0;margin:20px 0;display:flex;flex-direction:column;gap:12px}
+.todo-item{display:flex;align-items:center;gap:12px;padding:14px;border-radius:8px;border:3px solid var(--primary);background:transparent}
+.todo-item .check{width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;background:#fff;color:var(--primary);font-weight:700;cursor:pointer}
+.todo-item .text{flex:1;font-size:15px;color:#222}
+.todo-item .text.completed{text-decoration:line-through;color:#9aa4b2}
+.todo-item .star{width:34px;height:34px;border-radius:6px;border:0;background:transparent;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;color:#c1c6cc}
+.todo-item .star.active{color:#f6c943}
+.todo-item .delete{width:34px;height:34px;border-radius:6px;border:0;background:transparent;color:var(--danger);cursor:pointer;font-size:18px}
+.clear-row{display:flex;justify-content:center;margin-top:12px}
+.clear-all{background:var(--danger);color:#fff;border:0;padding:10px 28px;border-radius:8px;cursor:pointer}
+.todo-footer{margin-top:12px;text-align:center;font-size:12px;color:var(--muted)}
+@media (max-width:420px){.todo-app{width:94vw;padding:18px}.input-row button{width:40px;height:40px}}

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TODO LIST</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="todo-app">
+    <header class="todo-header">
+      <h1>TODO LIST</h1>
+    </header>
+
+    <main class="todo-main">
+      <div class="input-row">
+        <input id="todoInput" placeholder="이곳에 해야할 일을 적어주세요" />
+        <button id="addBtn" aria-label="추가">+</button>
+      </div>
+
+      <ul id="todoList" class="todo-list"></ul>
+
+      <div class="clear-row">
+        <button id="clearBtn" class="clear-all">Clear All</button>
+      </div>
+    </main>
+
+    <footer class="todo-footer">
+      <small>로컬 저장: 브라우저의 Local Storage 사용</small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
