@@ -2,7 +2,13 @@
 *{box-sizing:border-box}
 body{font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#f7f8fb,#fbfdff);margin:0;color:#111;display:flex;align-items:center;justify-content:center;height:100vh}
 .todo-app{width:360px;background:var(--card);border-radius:12px;box-shadow:0 10px 30px rgba(16,24,40,0.08);padding:28px}
-.todo-header h1{margin:0;text-align:center;font-size:28px;letter-spacing:1px}
+.todo-header{display:flex;align-items:center;justify-content:space-between}
+.todo-header h1{margin:0;font-size:28px;letter-spacing:1px}
+.header-controls{display:flex;gap:8px;align-items:center}
+.login-btn{padding:8px 12px;border-radius:8px;border:0;background:var(--primary);color:#fff;text-decoration:none;cursor:pointer;font-size:14px}
+.welcome{margin-right:12px;color:#333;font-weight:600;font-size:14px}
+/* plain-looking underlined link for signup */
+.link-text{color:var(--primary);text-decoration:underline;background:transparent;padding:0;margin-left:8px;font-size:14px}
 .input-row{display:flex;gap:12px;margin-top:20px}
 .input-row input{flex:1;padding:14px 16px;border:1px solid #e6e9ee;border-radius:8px;font-size:14px;color:#333}
 .input-row input::placeholder{color:var(--muted)}
@@ -11,6 +17,8 @@ body{font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradie
 .todo-item{display:flex;align-items:center;gap:12px;padding:14px;border-radius:8px;border:3px solid var(--primary);background:transparent}
 .todo-item .check{width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;background:#fff;color:var(--primary);font-weight:700;cursor:pointer}
 .todo-item .text{flex:1;font-size:15px;color:#222}
+.todo-item .text .text-content{font-size:15px}
+.todo-item .text .meta{font-size:12px;color:var(--muted);margin-top:6px}
 .todo-item .text.completed{text-decoration:line-through;color:#9aa4b2}
 .todo-item .star{width:34px;height:34px;border-radius:6px;border:0;background:transparent;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;color:#c1c6cc}
 .todo-item .star.active{color:#f6c943}

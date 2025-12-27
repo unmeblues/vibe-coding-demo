@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>로그인 - TODO LIST</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .login-page{width:360px;margin:40px auto;padding:28px;background:var(--card);border-radius:12px}
+    .login-page h2{text-align:center;margin:0 0 18px}
+    .login-page form{display:flex;flex-direction:column;gap:12px}
+    .login-page input{padding:12px;border:1px solid #e6e9ee;border-radius:8px}
+    .login-actions{display:flex;gap:12px;justify-content:center;margin-top:6px}
+    .login-actions button{padding:10px 18px;border-radius:8px;border:0;cursor:pointer}
+    .back-link{background:#f1f5ff;color:var(--primary)}
+    .signin-btn{background:var(--primary);color:#fff}
+  </style>
+</head>
+<body>
+  <div class="login-page">
+    <h2>로그인</h2>
+    <form id="loginForm" onsubmit="return false;">
+      <input id="email" type="email" placeholder="이메일" required />
+      <input id="password" type="password" placeholder="비밀번호" required />
+      <div class="login-actions">
+        <a href="index.html" class="login-btn back-link">뒤로</a>
+        <button id="signinBtn" class="signin-btn">로그인</button>
+      </div>
+    </form>
+
+    <div class="signup-row" style="text-align:center;margin-top:12px">
+      <span style="color:var(--muted);font-size:14px">계정이 없으신가요?</span>
+      <a href="signup.html" class="link-text">회원가입</a>
+    </div>
+
+    <p style="text-align:center;margin-top:12px;color:var(--muted);font-size:13px">※ 이메일/비밀번호 로그인 기능이 구현되어 있습니다.</p>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBsu-DQXfcJiGP0jITMPUxZFzKmllEzpf4",
+      authDomain: "vibe-coding-backend-11151.firebaseapp.com",
+      projectId: "vibe-coding-backend-11151",
+      storageBucket: "vibe-coding-backend-11151.firebasestorage.app",
+      messagingSenderId: "145221515426",
+      appId: "1:145221515426:web:2b0b9f95f84b91a3b9bffb",
+      databaseURL: "https://vibe-coding-backend-11151-default-rtdb.asia-southeast1.firebasedatabase.app/"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const signinBtn = document.getElementById('signinBtn')
+    const emailInput = document.getElementById('email')
+    const passwordInput = document.getElementById('password')
+
+    async function doSignin(){
+      const em = emailInput.value.trim()
+      const pw = passwordInput.value
+      if(!em){ alert('이메일을 입력하세요.'); emailInput.focus(); return }
+      if(!pw){ alert('비밀번호를 입력하세요.'); passwordInput.focus(); return }
+
+      signinBtn.disabled = true
+      signinBtn.textContent = '로그인 중...'
+
+      try{
+        await signInWithEmailAndPassword(auth, em, pw)
+        // 로그인 성공 시 메인으로 이동
+        window.location.href = 'index.html'
+      }catch(err){
+        console.error('signin error', err)
+        let msg = '로그인 실패: ' + (err.message || err.code || '알 수 없는 오류')
+        if(err.code === 'auth/wrong-password') msg = '비밀번호가 틀렸습니다.'
+        else if(err.code === 'auth/user-not-found') msg = '등록된 계정이 없습니다.'
+        else if(err.code === 'auth/invalid-email') msg = '이메일 형식이 올바르지 않습니다.'
+        else if(err.code === 'auth/too-many-requests') msg = '요청이 많습니다. 잠시 후 시도하세요.'
+        alert(msg)
+      }finally{
+        signinBtn.disabled = false
+        signinBtn.textContent = '로그인'
+      }
+    }
+
+    signinBtn.addEventListener('click', doSignin)
+    emailInput.addEventListener('keydown', (e)=> { if(e.key === 'Enter') doSignin() })
+    passwordInput.addEventListener('keydown', (e)=> { if(e.key === 'Enter') doSignin() })
+
+    onAuthStateChanged(auth, user => {
+      if(user){
+        // 이미 로그인된 상태면 메인으로 이동
+        window.location.href = 'index.html'
+      }
+    })
+  </script>
+</body>
+</html>
